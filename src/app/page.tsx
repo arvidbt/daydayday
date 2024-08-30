@@ -1,15 +1,16 @@
+import { auth } from "@/auth";
 import { HydrateClient } from "@/trpc/server";
 
 export default async function Home() {
-  // const hello = await api.post.hello({ text: "from tRPC" });
-  // const session = await getServerAuthSession();
-
-  // void api.post.getLatest.prefetch();
+  const user = await auth();
+  console.log(user);
 
   return (
     <HydrateClient>
       <main>
         <div className="text-xl font-black">DayDayDay</div>
+
+        <div className="grid-cols-24 relative grid max-w-xl gap-2"></div>
       </main>
     </HydrateClient>
   );
