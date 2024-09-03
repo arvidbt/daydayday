@@ -1,15 +1,17 @@
-import { generateDateArray } from "@/lib/date";
+// import { Day } from "@/components/day";
+// import { cachedGenerateDateArray } from "@/lib/date.server";
+import { SuspensedGrid } from "@/components/suspensed-grid";
 import { HydrateClient } from "@/trpc/server";
+import { Suspense, lazy } from "react";
 
-export default async function Onboarding() {
-  const dateArray = await generateDateArray();
-  console.log(dateArray);
+const Grid = lazy(() => import("@/components/grid"));
+
+export default async function Home() {
   return (
     <HydrateClient>
-      <div>
-        <div className="text-xl font-black">Home</div>
-        <div className="md:grid-cols-24 lg:grid-cols-36 grid grid-cols-12"></div>
-      </div>
+      <Suspense fallback={<SuspensedGrid />}>
+        <Grid />
+      </Suspense>
     </HydrateClient>
   );
 }

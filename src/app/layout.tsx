@@ -4,6 +4,8 @@ import { type Metadata } from "next";
 import { fontSans } from "@/styles/fonts";
 import { TRPCReactProvider } from "@/trpc/react";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toaster";
+import { Navbar } from "@/components/navbar";
 
 export const metadata: Metadata = {
   title: "daydayday",
@@ -17,9 +19,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="font-sans">
       <body
-        className={cn("min-h-screen font-sans antialiased", fontSans.variable)}
+        className={cn("font-sans antialiased", fontSans.variable)}
+        style={{ width: "100vw", height: "100vh" }}
       >
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <TRPCReactProvider>
+          <Navbar />
+          {children}
+          <Toaster />
+        </TRPCReactProvider>
       </body>
     </html>
   );

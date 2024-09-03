@@ -10,6 +10,7 @@ import {
 } from "@/server/db/schema";
 import { env } from "@/env";
 import { db } from "@/server/db";
+import { routes } from "./routes";
 
 export const authConfig = {
   adapter: DrizzleAdapter(db, {
@@ -25,8 +26,8 @@ export const authConfig = {
     }),
   ],
   pages: {
-    newUser: "/onboarding",
-    signIn: "/home",
-    signOut: "/",
+    newUser: routes.onboarding,
+    signIn: routes.home,
+    signOut: routes.landing,
   },
 } satisfies NextAuthConfig;

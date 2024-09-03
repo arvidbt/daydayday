@@ -9,8 +9,10 @@ export default async function Home() {
     <HydrateClient>
       <main>
         <div className="text-xl font-black">DayDayDay</div>
-
-        <div className="grid-cols-24 relative grid max-w-xl gap-2"></div>
+        <div>
+          Inspired by https://days.rory.codes/ and
+          https://busterbenson.com/life-in-weeks
+        </div>
       </main>
     </HydrateClient>
   );

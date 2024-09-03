@@ -3,19 +3,17 @@
 import { redirect } from "next/navigation";
 import { api } from "@/trpc/server";
 import { z } from "zod";
+import { routes } from "@/config/routes";
 
 const onboardingFormSchema = z.object({
   lifeExpectancy: z.coerce.number().max(120).nonnegative(),
   birthday: z.string().date(),
 });
 
-export async function doOnboard(data: FormData) {
-  const parseResult = onboardingFormSchema.safeParse(
-    Object.fromEntries(data.entries()),
-  );
+export async function doOnboard(data: z.infer<typeof onboardingFormSchema>) {
+  const parseResult = onboardingFormSchema.safeParse(data);
 
   if (!parseResult.success) {
-    console.log(parseResult.error);
     return { errors: parseResult.error.flatten().fieldErrors };
   }
 
@@ -26,5 +24,5 @@ export async function doOnboard(data: FormData) {
     lifeExpectancy: lifeExpectancy,
   });
 
-  redirect("/home");
+  redirect(routes.home);
 }

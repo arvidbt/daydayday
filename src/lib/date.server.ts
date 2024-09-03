@@ -1,8 +1,9 @@
 import { type DayProps } from "@/components/day";
 import { api } from "@/trpc/server";
 import { addDays, isPast, isToday } from "date-fns";
+import { cache } from "react";
 
-export async function generateDateArray() {
+async function uncachedGenerateDateArray() {
   const userInfo = await api.userRouter.getUserInfo();
 
   if (!userInfo) {
@@ -10,6 +11,9 @@ export async function generateDateArray() {
   }
 
   const { birthday, lifeExpectancy } = userInfo;
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, month, day] = birthday.split("-");
 
   const startDate = new Date(birthday);
   const endDate = addDays(startDate, lifeExpectancy! * 365);
@@ -25,7 +29,10 @@ export async function generateDateArray() {
       past: isPast(formattedDate),
       today: isToday(formattedDate),
       birthday:
-        formattedDate.getDate() === 27 && formattedDate.getMonth() + 1 === 2,
+        day && month
+          ? formattedDate.getDate() === parseInt(day) &&
+            formattedDate.getMonth() + 1 === parseInt(month)
+          : false,
     };
 
     dateArray.push(dateInfo);
@@ -34,3 +41,5 @@ export async function generateDateArray() {
 
   return dateArray;
 }
+
+export const cachedGenerateDateArray = cache(uncachedGenerateDateArray);

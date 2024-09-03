@@ -19,9 +19,9 @@ const config = {
     },
     extend: {
       gridTemplateColumns: {
-        // Simple 16 column grid
-        "36": "repeat(36, minmax(0, 1fr))",
+        "64": "repeat(64, minmax(0, 1fr))",
         "24": "repeat(24, minmax(0, 1fr))",
+        "14": "repeat(14, minmax(0, 1fr))",
       },
       colors: {
         border: "hsl(var(--border))",
