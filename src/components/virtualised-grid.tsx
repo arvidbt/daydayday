@@ -4,13 +4,12 @@ import { Day, type DayProps } from "./day";
 import * as React from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { cn } from "@/lib/utils";
-import useWindowDimensions from "@/hooks/useWindowDimensions";
 
 interface VirtualisedListProps {
   dateArray: DayProps[];
 }
 
-export function VirtualisedList({ dateArray }: VirtualisedListProps) {
+export function VirtualisedGrid({ dateArray }: VirtualisedListProps) {
   const parentRef = React.useRef<HTMLDivElement>(null);
 
   const rowVirtualizer = useVirtualizer({

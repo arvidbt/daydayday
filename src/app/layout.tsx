@@ -19,8 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="font-sans">
       <body
-        className={cn("font-sans antialiased", fontSans.variable)}
-        style={{ width: "100vw", height: "100vh" }}
+        className={cn(
+          "h-screen w-screen font-sans antialiased",
+          fontSans.variable,
+        )}
       >
         <TRPCReactProvider>
           <Navbar />

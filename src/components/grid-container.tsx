@@ -1,12 +1,12 @@
 import { cachedGenerateDateArray } from "@/lib/date.server";
-import { VirtualisedList } from "./virtualised-list";
+import { VirtualisedGrid } from "./virtualised-grid";
 
-export default async function Grid() {
+export default async function GridContainer() {
   const dateArray = await cachedGenerateDateArray();
 
   if (!dateArray) {
     return <div>could not load</div>;
   }
 
-  return <VirtualisedList dateArray={dateArray} />;
+  return <VirtualisedGrid dateArray={dateArray} />;
 }
